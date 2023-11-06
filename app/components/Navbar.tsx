@@ -30,9 +30,9 @@ const Navbar: React.FunctionComponent = () => {
             <path
               d="M2 2H28M2 11.5H28M2 21H28"
               stroke="black"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
