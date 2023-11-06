@@ -1,13 +1,68 @@
+import { gsap } from "@/app/lib/utils";
+import { useRef, useLayoutEffect } from "react";
 import BrandLogo from "./BrandLogo";
 
 const Footer: React.FunctionComponent = () => {
+  const socials = useRef<HTMLDivElement | null>(null);
+  const brand = useRef<HTMLDivElement | null>(null);
+  const signature = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    let card = gsap.fromTo(
+      socials.current,
+      {
+        x: -100,
+        opacity: 0,
+        duration: 2,
+        ease: "expo.out",
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 2,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: socials.current,
+          // scrub: true,
+        },
+      }
+    );
+
+    let date = gsap.fromTo(
+      signature.current,
+      {
+        x: 100,
+        opacity: 0,
+        duration: 2.5,
+        ease: "power1.out",
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 2.5,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: socials.current,
+          // scrub: true,
+        },
+      }
+    );
+
+    return () => {
+      card.kill();
+      date.kill();
+    };
+  }, []);
   return (
     <section className="bg-white py-3  w-full">
       <div className="sm:w-10/12 w-11/12 mx-auto md:flex block justify-between items-center">
-      <div className="md:order-2 flex justify-center py-4 md:py-0">
+        <div className="md:order-2 flex justify-center py-4 md:py-0">
           <BrandLogo />
         </div>
-        <div className="inline-flex sm:gap-5 justify-between md:w-fit w-full  md:order-1 py-4 md:py-0">
+        <div
+          ref={socials}
+          className="inline-flex sm:gap-5 justify-between md:w-fit w-full  md:order-1 py-4 md:py-0"
+        >
           <a href="#" className="text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -19,21 +74,21 @@ const Footer: React.FunctionComponent = () => {
               <path
                 d="M12 16C13.0609 16 14.0783 15.5786 14.8284 14.8284C15.5786 14.0783 16 13.0609 16 12C16 10.9391 15.5786 9.92172 14.8284 9.17157C14.0783 8.42143 13.0609 8 12 8C10.9391 8 9.92172 8.42143 9.17157 9.17157C8.42143 9.92172 8 10.9391 8 12C8 13.0609 8.42143 14.0783 9.17157 14.8284C9.92172 15.5786 10.9391 16 12 16Z"
                 stroke="#9B9B9B"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M3 16V8C3 6.67392 3.52678 5.40215 4.46447 4.46447C5.40215 3.52678 6.67392 3 8 3H16C17.3261 3 18.5979 3.52678 19.5355 4.46447C20.4732 5.40215 21 6.67392 21 8V16C21 17.3261 20.4732 18.5979 19.5355 19.5355C18.5979 20.4732 17.3261 21 16 21H8C6.67392 21 5.40215 20.4732 4.46447 19.5355C3.52678 18.5979 3 17.3261 3 16Z"
                 stroke="#9B9B9B"
-                stroke-width="1.5"
+                strokeWidth="1.5"
               />
               <path
                 d="M17.5 6.51002L17.51 6.49902"
                 stroke="#9B9B9B"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </a>
@@ -54,7 +109,10 @@ const Footer: React.FunctionComponent = () => {
           <button className="text-sm text-gray-200">Terms of Service</button>
           <button className="text-sm text-gray-200">Privacy Policy</button>
         </div>
-        <p className="text-sm text-gray-200 md:pt-0 pt-4 sm:text-start text-center md:order-3">
+        <p
+          ref={signature}
+          className="text-sm text-gray-200 md:pt-0 pt-4 sm:text-start text-center md:order-3"
+        >
           Copyright &copy; 2023 Paydue All rights reserved
         </p>
       </div>

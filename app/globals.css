@@ -25,3 +25,64 @@
     background-size: 150%;
   }
 }
+
+
+.light {
+  background: #3EA9E0;
+  background: -moz-linear-gradient(
+    70deg,
+    #3EA9E0 0%,
+    #3EA9E0 5%,
+    #3EA9E0 5%,
+    #3EA9E0 42%,
+    #8ECAE6 49%,
+    #8ECAE6 53%,
+    #3EA9E0 59%,
+    #3EA9E0 100%
+  );
+  background: -webkit-linear-gradient(
+    70deg,
+    #3EA9E0 0%,
+    #3EA9E0 5%,
+    #3EA9E0 5%,
+    #3EA9E0 42%,
+    #8ECAE6 49%,
+    #8ECAE6 53%,
+    #3EA9E0 59%,
+    #3EA9E0 100%
+  );
+  background: linear-gradient(
+    70deg,
+    #3EA9E0 0%,
+    #3EA9E0 5%,
+    #3EA9E0 5%,
+    #3EA9E0 42%,
+    #8ECAE6 49%,
+    #8ECAE6 53%,
+    #3EA9E0 59%,
+    #3EA9E0 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3EA9E0', endColorstr='#3EA9E0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-position: 0px;
+  background-size: 220%;
+}
+
+
+@keyframes light {
+  0% {
+    background-position: -220px;
+  }
+  100% {
+    background-position: 0px;
+  }
+}
+
+@-webkit-keyframes light {
+  0% {
+    background-position: -220px;
+  }
+  100% {
+    background-position: 0px;
+  }
+}
