@@ -1,27 +1,27 @@
 @tailwind base;
-@tailwind components;
+/* @tailwind components; */
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.secret {
+  background-image: url("/assets/img/secret.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.secret-ellipse {
+  background-image: url("/assets/img/secret-ellipse.svg");
+  background-repeat: no-repeat;
+  background-position: 40% 50%;
+  background-size: 150%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@media screen and (max-width: 768px) {
+  .secret {
+    background-repeat: no-repeat;
+    background-size: 150%;
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .secret-ellipse {
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 150%;
+  }
 }
