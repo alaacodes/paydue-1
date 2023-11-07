@@ -1,3 +1,4 @@
+"use client";
 import { gsap } from "@/app/lib/utils";
 import { useRef, useLayoutEffect } from "react";
 import BrandLogo from "./BrandLogo";
@@ -15,6 +16,9 @@ const Footer: React.FunctionComponent = () => {
         opacity: 0,
         duration: 2,
         ease: "expo.out",
+        scrollTrigger: {
+          trigger: socials.current,
+        },
       },
       {
         x: 0,
@@ -23,7 +27,6 @@ const Footer: React.FunctionComponent = () => {
         ease: "expo.out",
         scrollTrigger: {
           trigger: socials.current,
-          // scrub: true,
         },
       }
     );
@@ -33,14 +36,16 @@ const Footer: React.FunctionComponent = () => {
       {
         x: 100,
         opacity: 0,
-        duration: 2.5,
-        ease: "power1.out",
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: signature.current,
+        },
       },
       {
         x: 0,
         opacity: 1,
-        duration: 2.5,
-        ease: "power1.out",
+        // duration: 2.5,
+        ease: "expo.out",
         scrollTrigger: {
           trigger: socials.current,
           // scrub: true,
@@ -48,21 +53,20 @@ const Footer: React.FunctionComponent = () => {
       }
     );
 
+    console.log("Tick");
+
     return () => {
       card.kill();
       date.kill();
     };
   }, []);
   return (
-    <section className="bg-white py-3  w-full">
-      <div className="sm:w-10/12 w-11/12 mx-auto md:flex block justify-between items-center">
-        <div className="md:order-2 flex justify-center py-4 md:py-0">
+    <section className="bg-white py-3 w-full">
+      <div className="sm:w-10/12 w-11/12 mx-auto lg:flex block justify-between items-center">
+        <div className="md:order-2 flex lg:justify-center justify-start py-4 md:py-0 -ml-2 md:mb-5 mb-2 lg:mb-0">
           <BrandLogo />
         </div>
-        <div
-          ref={socials}
-          className="inline-flex sm:gap-5 justify-between md:w-fit w-full  md:order-1 py-4 md:py-0"
-        >
+        <div className="inline-flex sm:gap-5 justify-between md:w-fit w-full  md:order-1 py-4 md:py-0">
           <a href="#" className="text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -109,10 +113,7 @@ const Footer: React.FunctionComponent = () => {
           <button className="text-sm text-gray-200">Terms of Service</button>
           <button className="text-sm text-gray-200">Privacy Policy</button>
         </div>
-        <p
-          ref={signature}
-          className="text-sm text-gray-200 md:pt-0 pt-4 sm:text-start text-center md:order-3"
-        >
+        <p className="text-sm text-gray-200 md:pt-0 pt-4 sm:text-start text-center md:order-3">
           Copyright &copy; 2023 Paydue All rights reserved
         </p>
       </div>
