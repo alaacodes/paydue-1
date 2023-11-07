@@ -1,10 +1,12 @@
+"use client"
 import BrandLogo from "./BrandLogo";
 
 const Navbar: React.FunctionComponent = () => {
   return (
-    <section className="bg-white py-3 fixed top-0 w-full border-b-0.5 border-gray-50 shadow-sm z-[100]">
+    <section className="bg-white py-3 w-full absolute top-0 border-b-0.5 border-gray-50 shadow-sm z-[100]">
       <div className="md:w-10/12 w-11/12 mx-auto flex justify-between items-center">
         <BrandLogo />
+
         <div className="hidden md:inline-flex gap-5">
           <button className="text-xs">About Us</button>
           <button className="text-xs">Downloads</button>
