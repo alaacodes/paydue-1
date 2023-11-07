@@ -49,7 +49,12 @@ export default function BaseModal({
             <div className="overflow-hidden pointer-events-auto w-full p-5 mx-auto z-[600]">
               <div className={className + "relative"}>
                 <button
-                  className="absolute z-[610] top-5 right-4 m-4"
+                  disabled={persist}
+                  className={
+                    persist
+                      ? "opacity-40 absolute z-[610] top-5 right-4 m-4"
+                      : "absolute z-[610] top-5 right-4 m-4"
+                  }
                   onClick={onClick}
                 >
                   <span className="w-full flex gap-2 justify-center items-center">
