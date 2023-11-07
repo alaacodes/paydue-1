@@ -1,24 +1,29 @@
 "use client";
 import Image from "next/image";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import { gsap } from "@/app/lib/utils";
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
+import PagePreloader from "./components/PagePreloader";
+import BaseModal from "./components/Modal";
 
 export default function Home() {
   const guy = useRef<HTMLDivElement | null>(null);
   const mastercard = useRef<HTMLDivElement | null>(null);
   const tickElem = useRef<HTMLImageElement | null>(null);
   const btn = useRef<HTMLButtonElement | null>(null);
+  const [pageLoading, setPageLoading] = useState<Boolean>(true);
+  const [modalState, setmodalState] = useState<Boolean>(false);
 
   useLayoutEffect(() => {
+    const myDelay = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
     let ctx = gsap.fromTo(
       guy.current,
       {
         x: 100,
         opacity: 0,
         duration: 4,
-        delay: 2,
+        delay: 1,
         ease: "elastic",
         yoyo: true,
       },
@@ -26,7 +31,7 @@ export default function Home() {
         x: 0,
         opacity: 1,
         duration: 4,
-        delay: 2,
+        delay: 1,
         ease: "elastic",
         yoyo: true,
       }
@@ -37,14 +42,14 @@ export default function Home() {
       {
         scale: 1.3,
         duration: 5,
-        delay: 2,
+        delay: 1,
         ease: "elastic",
         yoyo: true,
       },
       {
         scale: 1,
         duration: 5,
-        delay: 2,
+        delay: 1,
         ease: "elastic",
         yoyo: true,
       }
@@ -53,10 +58,10 @@ export default function Home() {
     let card = gsap.fromTo(
       mastercard.current,
       {
-        y: 100,
+        y: -100,
         opacity: 0,
         duration: 4,
-        delay: 2,
+        delay: 1,
         ease: "elastic",
         yoyo: true,
       },
@@ -64,7 +69,7 @@ export default function Home() {
         y: 0,
         opacity: 1,
         duration: 4,
-        delay: 2,
+        delay: 1,
         ease: "elastic",
         yoyo: true,
       }
@@ -77,7 +82,7 @@ export default function Home() {
         ease: "circ.inOut",
         yoyo: true,
         repeat: -1,
-        delay: 5,
+        delay: 3,
         backgroundPositionX: -200,
       },
       {
@@ -85,25 +90,31 @@ export default function Home() {
         ease: "circ.inOut",
         yoyo: true,
         repeat: -1,
-        delay: 5,
+        delay: 3,
         backgroundPositionX: 0,
       }
     );
+
+    // throw new Error('I caused it')
+
     return () => {
       ctx.kill();
       tick.kill();
       card.kill();
       button.kill();
+      clearInterval(myDelay);
     };
   }, []);
 
   return (
-    <div>
-      <Navbar />
-      <main className="min-h-screen secret-ellipse relative">
-        <div className="secret">
-          <section className="md:w-10/12 w-11/12 md:flex gap-24 justify-start mx-auto pt-24 md:pt-40 pb-24 md:mb-2">
-            <aside className="md:w-6/12 w-11/12 mx-auto pt-10">
+    <main>
+      {pageLoading && <PagePreloader />}
+      <main
+        className={pageLoading ? "hidden" : "w-full secret-ellipse relative"}
+      >
+        <div className="secret overflow-x-hidden">
+          <section className="lg:w-10/12 w-11/12 lg:flex gap-24 justify-start mx-auto pt-24 lg:pt-40 lg:pb-24 md:pb-0 pb-6 lg:mb-2 md:mb-0 mb-0">
+            <aside className="lg:w-6/12 md:w-10/12 w-11/12 mx-auto pt-10 lg:mb-0 mb-5">
               <h1 className="text-blue-100 md:text-xl text-base not-italic font-normal md:leading-[25px] leading-[20px] uppercase">
                 PAYDUE
               </h1>
@@ -139,7 +150,7 @@ export default function Home() {
               </button>
             </aside>
 
-            <aside className="md:w-4/12 w-10/12 mx-auto  md:h-[27.5rem] h-[22rem] relative md:mt-0 mt-20 md:mb-0 mb-40">
+            <aside className="lg:w-4/12 md:w-6/12 w-10/12 mx-auto  md:h-[27.5rem] h-[22rem] relative lg:mt-0 md:mt-30 mt-32 lg:mb-0 md:mb-20 mb-14">
               {/* //First card */}
               <div className="md:w-[18rem] w-[15rem] absolute md:h-[25rem] h-[22rem] shrink-0 md:py-8 py-6 px-6 z-40 bg-white shadow-md flex flex-col items-center rounded-xl">
                 <Image
@@ -219,7 +230,7 @@ export default function Home() {
 
               <div
                 ref={mastercard}
-                className="absolute w-[12rem] bg-[#50505011] backdrop-blur-sm top-[-40px] right-[-3px] z-40 gap-4 inline-flex justify-start items-center px-3 py-2 h-fit shrink-0 rounded-[12.631px]"
+                className="absolute w-[12rem] bg-[#50505011] backdrop-blur-sm top-[-40px] lg:right-[-3px] md:right-[-2.5rem] -right-[20px] z-40 gap-4 inline-flex justify-start items-center px-3 py-2 h-fit shrink-0 rounded-[12.631px]"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +275,7 @@ export default function Home() {
               {/* //Guy in hat */}
               <div
                 ref={guy}
-                className="absolute guy md:bottom-2 bottom-[-3rem] gap-3 w-[13rem] bg-[#50505012] md:left-[14.25rem] -left-[1.5rem] z-40 inline-flex items-center px-4 py-2 shrink-0 backdrop-blur-sm rounded-[12.631px]"
+                className="absolute guy lg:bottom-2 md:bottom-[-1rem] bottom-[-3rem] gap-3 w-[13rem] bg-[#50505012] lg:left-[14.25rem] md:left-[12rem] -left-[1.5rem] z-40 inline-flex items-center px-4 py-2 shrink-0 backdrop-blur-sm rounded-[12.631px]"
               >
                 <Image
                   priority={true}
@@ -284,9 +295,20 @@ export default function Home() {
               </div>
             </aside>
           </section>
+          <button onClick={() => setmodalState(true)}>Pop modal</button>
+          <BaseModal
+            onClick={() => setmodalState(false)}
+            className="w-8/12 mx-auto relative rounded-lg bg-white h-full flex flex-col justify-center items-center"
+            displayed={modalState}
+          >
+            <div className="h-[100vh] w-fit flex flex-col justify-center items-center">
+              <h1 className="text-center text-black text-3xl">Hello world</h1>
+
+              <button onClick={() => console.log("Hello")}>Click me</button>
+            </div>
+          </BaseModal>
         </div>
-        <Footer />
       </main>
-    </div>
+    </main>
   );
 }
