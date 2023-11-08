@@ -3,7 +3,11 @@
 @tailwind utilities;
 @import url("./font.css");
 
-body {
+body,
+h1,
+h2,
+p,
+h3 {
   font-family: "GothamPro", sans-serif;
 }
 .secret {
@@ -87,4 +91,9 @@ body {
   100% {
     background-position: 0px;
   }
+}
+
+
+.logo{
+  z-index: 99999;
 }
