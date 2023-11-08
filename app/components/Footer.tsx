@@ -1,65 +1,7 @@
 "use client";
-import { gsap } from "@/app/lib/utils";
-import { useRef, useLayoutEffect } from "react";
 import BrandLogo from "./BrandLogo";
 
 const Footer: React.FunctionComponent = () => {
-  const socials = useRef<HTMLDivElement | null>(null);
-  const brand = useRef<HTMLDivElement | null>(null);
-  const signature = useRef<HTMLDivElement | null>(null);
-
-  useLayoutEffect(() => {
-    let card = gsap.fromTo(
-      socials.current,
-      {
-        x: -100,
-        opacity: 0,
-        duration: 2,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: socials.current,
-        },
-      },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 2,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: socials.current,
-        },
-      }
-    );
-
-    let date = gsap.fromTo(
-      signature.current,
-      {
-        x: 100,
-        opacity: 0,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: signature.current,
-        },
-      },
-      {
-        x: 0,
-        opacity: 1,
-        // duration: 2.5,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: socials.current,
-          // scrub: true,
-        },
-      }
-    );
-
-    console.log("Tick");
-
-    return () => {
-      card.kill();
-      date.kill();
-    };
-  }, []);
   return (
     <section className="bg-white py-3 w-full">
       <div className="sm:w-10/12 w-11/12 mx-auto lg:flex block justify-between items-center">
