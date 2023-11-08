@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import type { Viewport } from "next";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "PayDue",
@@ -31,17 +28,19 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
+  auth,
 }: {
   children: React.ReactNode;
+  auth: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body>
         <main className="relative">
-        <Navbar />
-        <div id="portal" />
-        {children}
-        <Footer />
+          <Navbar />
+          <div id="portal" />
+          {children}
+          <Footer />
         </main>
       </body>
     </html>
